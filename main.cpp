@@ -66,6 +66,10 @@ int main()
     std::cout << "================" << std::endl;
     auto r = testConvertToNumberBase2("10110");
     std::cout << r << std::endl;
+    std::cout << "================" << std::endl;
+    testConvertDouble("23.23");
+    testConvertFloat("400.23");
+    pracChar32();
     return 0;
 }
 
