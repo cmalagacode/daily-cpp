@@ -1,6 +1,8 @@
 #include <iostream>
 #include <vector>
 #include <cstdint>
+#include "window.h"
+
 
 using i32 = std::int32_t;
 using u32 = std::uint32_t;
@@ -51,6 +53,12 @@ int main()
     }
     std::cout << "\n";
     std::cout << "===================" << "\n";
+    std::cout << "===================" << "\n";
+
+    std::vector<i32> windowFindInput = {10, 5, 7, 10, 10};
+    constexpr i32 target = 20;
+    i32 windowResult = window::find(windowFindInput, target);
+    std::cout << "Window Result: " << windowResult << "\n";
     return 0;
 }
 
