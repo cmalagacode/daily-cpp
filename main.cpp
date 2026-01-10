@@ -2,6 +2,8 @@
 #include <vector>
 #include <cstdint>
 #include "window.h"
+#include "string_fun.hpp"
+#include <bitset>
 
 
 using i32 = std::int32_t;
@@ -59,6 +61,11 @@ int main()
     constexpr i32 target = 20;
     i32 windowResult = window::find(windowFindInput, target);
     std::cout << "Window Result: " << windowResult << "\n";
+    std::cout << "================" << std::endl;
+    testConvertToNumber("22");
+    std::cout << "================" << std::endl;
+    auto r = testConvertToNumberBase2("10110");
+    std::cout << r << std::endl;
     return 0;
 }
 
