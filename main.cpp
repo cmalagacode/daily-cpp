@@ -26,6 +26,8 @@ bool isPali(const std::string& x)
 
 bool isSameSum(const std::vector<i32>& x, const std::vector<i32>& y);
 
+std::vector<i32> combineTwoSorted(const std::vector<i32>& x, const std::vector<i32>& y);
+
 
 int main()
 {
@@ -39,6 +41,15 @@ int main()
     const std::vector<i32> x = {20, 30, 40};
     const std::vector<i32> y = {40, 30, 20};
     std::cout << isSameSum(x, y) << "\n";
+    std::cout << "===================" << "\n";
+    std::cout << "===================" << "\n";
+    const auto a1 = std::vector<i32> {10, 20, 30, 40};
+    const auto a2 = std::vector<i32> {5, 10, 15, 20, 50};
+    const auto foo = combineTwoSorted(a1, a2);
+    for (const auto& r : foo) {
+        std::cout << r << " ";
+    }
+    std::cout << "\n";
     std::cout << "===================" << "\n";
     return 0;
 }
@@ -66,4 +77,35 @@ bool isSameSum(const std::vector<i32>& x, const std::vector<i32>& y)
         rightArray++;
     }
     return leftArraySum == rightArraySum;
+}
+
+std::vector<i32> combineTwoSorted(const std::vector<i32>& x, const std::vector<i32>& y)
+{
+    size_t leftArrayPTR = 0;
+    size_t rightArrayPTR = 0;
+    std::vector<i32> result;
+
+    while (leftArrayPTR < x.size() && rightArrayPTR < y.size()) {
+        if (x[leftArrayPTR] == y[rightArrayPTR]) {
+            result.push_back(x[leftArrayPTR]);
+            result.push_back(y[rightArrayPTR]);
+            ++leftArrayPTR;
+            ++rightArrayPTR;
+        } else if (x[leftArrayPTR] < y[rightArrayPTR]) {
+            result.push_back(x[leftArrayPTR]);
+            ++leftArrayPTR;
+        } else {
+            result.push_back(y[rightArrayPTR]);
+            ++rightArrayPTR;
+        }
+    }
+    while (leftArrayPTR < x.size()) {
+        result.push_back(x[leftArrayPTR]);
+        leftArrayPTR++;
+    }
+    while (rightArrayPTR < y.size()) {
+        result.push_back(y[rightArrayPTR]);
+        rightArrayPTR++;
+    }
+    return result;
 }
