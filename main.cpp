@@ -71,6 +71,7 @@ int main()
     testConvertFloat("400.23");
     pracChar32();
     std::cout << "Hello" << std::endl;
+    std::cout << "Hello" << std::endl;
     return 0;
 }
 
