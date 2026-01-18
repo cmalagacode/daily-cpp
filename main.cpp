@@ -4,6 +4,8 @@
 #include "window.h"
 #include "string_fun.hpp"
 #include <bitset>
+#include <format>
+#include <chrono>
 
 
 using i32 = std::int32_t;
@@ -31,6 +33,17 @@ bool isPali(const std::string& x)
 bool isSameSum(const std::vector<i32>& x, const std::vector<i32>& y);
 
 std::vector<i32> combineTwoSorted(const std::vector<i32>& x, const std::vector<i32>& y);
+
+void testChrono()
+{
+    auto text = std::format("{1} vs {0}", 42, 100); // 100 vs 42
+    std::cout << text << "\n";
+    auto curr = std::chrono::system_clock::now();
+    auto currYear = std::format("{:%Y}", curr);
+    std::cout << "The current year is: " << currYear << "\n";
+    auto currDay = std::format("{:%d}", curr);
+    std::cout << "The current day is: " << currDay << "\n";
+}
 
 
 int main()
@@ -72,6 +85,9 @@ int main()
     pracChar32();
     std::cout << "Hello" << std::endl;
     std::cout << "Hello" << std::endl;
+    auto text = std::format("{} is {}", 10, 10);
+    std::cout << text << "\n";
+    testChrono();
     return 0;
 }
 
