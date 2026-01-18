@@ -43,6 +43,10 @@ void testChrono()
     std::cout << "The current year is: " << currYear << "\n";
     auto currDay = std::format("{:%d}", curr);
     std::cout << "The current day is: " << currDay << "\n";
+    auto currMonth = std::format("{:%m}", curr);
+    std::cout << "The current month is: " << currMonth << "\n";
+    auto currTime = std::format("{:%H:%M:%S}", curr);
+    std::cout << "The current time is: " << currTime << "\n";
 }
 
 
