@@ -7,6 +7,7 @@
 #include <format>
 #include <chrono>
 #include <print>
+#include <fstream>
 
 
 using i32 = std::int32_t;
@@ -95,6 +96,23 @@ int main()
     testChrono();
     std::print("The answer is {}\n", 42);
     std::println("I am printing a line {}", 200);
+    std::println("==================");
+    std::FILE* F = std::fopen("cool.txt", "w");
+    if (F) {
+        std::println(F, "Writing to the file");
+        std::println(F, "Writing to the file");
+        std::println(F, "Writing to the file");
+        std::fclose(F);
+    }
+    std::fstream RF("cool.txt");
+    if (!RF.is_open()) {
+        std::cerr << "Error opening file\n";
+    }
+    std::string line;
+    while (std::getline(RF, line)) {
+        std::cout << std::format("Line: {}\n", line);
+    }
+    std::println("==================");
     return 0;
 }
 
