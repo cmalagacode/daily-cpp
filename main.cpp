@@ -6,6 +6,7 @@
 #include <bitset>
 #include <format>
 #include <chrono>
+#include <print>
 
 
 using i32 = std::int32_t;
@@ -86,12 +87,14 @@ int main()
     std::cout << "================" << std::endl;
     testConvertDouble("23.23");
     testConvertFloat("400.23");
-    pracChar32();
+    // pracChar32();
     std::cout << "Hello" << std::endl;
     std::cout << "Hello" << std::endl;
     auto text = std::format("{} is {}", 10, 10);
     std::cout << text << "\n";
     testChrono();
+    std::print("The answer is {}\n", 42);
+    std::println("I am printing a line {}", 200);
     return 0;
 }
 

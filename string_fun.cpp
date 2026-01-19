@@ -26,7 +26,7 @@ void testConvertDouble(std::string x)
 }
 void pracChar32()
 {
-    char32_t emoji = '😁';
-    std::string s(1, emoji);
-    std::cout << "This is an emoji smily face: " << s  << std::endl;
+    // char32_t emoji = '😁';
+    // std::string s(1, emoji);
+    // std::cout << "This is an emoji smily face: " << s  << std::endl;
 }
