@@ -50,8 +50,9 @@ void test_chrono() {
 
 void test_google_format() {
   std::string name = "Google";
-  std::cout << std::format("Hello {} format", name);
+  std::cout << std::format("Hello {} format\n", name);
   std::int8_t i = 0;
+  std::cout << std::format("Number {}\n", i);
 }
 
 
