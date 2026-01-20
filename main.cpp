@@ -13,13 +13,11 @@
 using i32 = std::int32_t;
 using u32 = std::uint32_t;
 
-void helloWorld()
-{
+void hello_world() {
     std::cout << "Hello World" << "\n";
 }
 
-bool isPali(const std::string& x)
-{
+bool is_pali(const std::string& x) {
     size_t left = 0;
     size_t right = x.size() - 1;
     while (left < right) {
@@ -32,12 +30,11 @@ bool isPali(const std::string& x)
     return true;
 }
 
-bool isSameSum(const std::vector<i32>& x, const std::vector<i32>& y);
+bool is_same_sum(const std::vector<i32>& x, const std::vector<i32>& y);
 
-std::vector<i32> combineTwoSorted(const std::vector<i32>& x, const std::vector<i32>& y);
+std::vector<i32> combine_two_sorted(const std::vector<i32>& x, const std::vector<i32>& y);
 
-void testChrono()
-{
+void test_chrono() {
     auto text = std::format("{1} vs {0}", 42, 100); // 100 vs 42
     std::cout << text << "\n";
     auto curr = std::chrono::system_clock::now();
@@ -51,73 +48,78 @@ void testChrono()
     std::cout << "The current time is: " << currTime << "\n";
 }
 
-
-int main()
-{
-    helloWorld();
-    // 3443
-    const std::string inputValue = "3443";
-    const bool result = isPali(inputValue);
-    std::cout << std::boolalpha;
-    std::cout << result << "\n";
-    std::cout << "===================" << "\n";
-    const std::vector<i32> x = {20, 30, 40};
-    const std::vector<i32> y = {40, 30, 20};
-    std::cout << isSameSum(x, y) << "\n";
-    std::cout << "===================" << "\n";
-    std::cout << "===================" << "\n";
-    const auto a1 = std::vector<i32> {10, 20, 30, 40};
-    const auto a2 = std::vector<i32> {5, 10, 15, 20, 50};
-    const auto foo = combineTwoSorted(a1, a2);
-    for (const auto& r : foo) {
-        std::cout << r << " ";
-    }
-    std::cout << "\n";
-    std::cout << "===================" << "\n";
-    std::cout << "===================" << "\n";
-
-    std::vector<i32> windowFindInput = {10, 5, 7, 10, 10};
-    constexpr i32 target = 20;
-    i32 windowResult = window::find(windowFindInput, target);
-    std::cout << "Window Result: " << windowResult << "\n";
-    std::cout << "================" << std::endl;
-    testConvertToNumber("22");
-    std::cout << "================" << std::endl;
-    auto r = testConvertToNumberBase2("10110");
-    std::cout << r << std::endl;
-    std::cout << "================" << std::endl;
-    testConvertDouble("23.23");
-    testConvertFloat("400.23");
-    // pracChar32();
-    std::cout << "Hello" << std::endl;
-    std::cout << "Hello" << std::endl;
-    auto text = std::format("{} is {}", 10, 10);
-    std::cout << text << "\n";
-    testChrono();
-    std::print("The answer is {}\n", 42);
-    std::println("I am printing a line {}", 200);
-    std::println("==================");
-    std::FILE* F = std::fopen("cool.txt", "w");
-    if (F) {
-        std::println(F, "Writing to the file");
-        std::println(F, "Writing to the file");
-        std::println(F, "Writing to the file");
-        std::fclose(F);
-    }
-    std::fstream RF("cool.txt");
-    if (!RF.is_open()) {
-        std::cerr << "Error opening file\n";
-    }
-    std::string line;
-    while (std::getline(RF, line)) {
-        std::cout << std::format("Line: {}\n", line);
-    }
-    std::println("==================");
-    return 0;
+void test_google_format() {
+  std::string name = "Google";
+  std::cout << std::format("Hello {} format", name);
+  std::int8_t i = 0;
 }
 
-bool isSameSum(const std::vector<i32>& x, const std::vector<i32>& y)
-{
+
+int main() {
+  hello_world();
+  // 3443
+  const std::string inputValue = "3443";
+  const bool result = is_pali(inputValue);
+  std::cout << std::boolalpha;
+  std::cout << result << "\n";
+  std::cout << "===================" << "\n";
+  const std::vector<i32> x = {20, 30, 40};
+  const std::vector<i32> y = {40, 30, 20};
+  std::cout << is_same_sum(x, y) << "\n";
+  std::cout << "===================" << "\n";
+  std::cout << "===================" << "\n";
+  const auto a1 = std::vector<i32> {10, 20, 30, 40};
+  const auto a2 = std::vector<i32> {5, 10, 15, 20, 50};
+  const auto foo = combine_two_sorted(a1, a2);
+  for (const auto& r : foo) {
+      std::cout << r << " ";
+  }
+  std::cout << "\n";
+  std::cout << "===================" << "\n";
+  std::cout << "===================" << "\n";
+
+  std::vector<i32> windowFindInput = {10, 5, 7, 10, 10};
+  constexpr i32 target = 20;
+  i32 windowResult = window::find(windowFindInput, target);
+  std::cout << "Window Result: " << windowResult << "\n";
+  std::cout << "================" << std::endl;
+  testConvertToNumber("22");
+  std::cout << "================" << std::endl;
+  auto r = testConvertToNumberBase2("10110");
+  std::cout << r << std::endl;
+  std::cout << "================" << std::endl;
+  testConvertDouble("23.23");
+  testConvertFloat("400.23");
+  // pracChar32();
+  std::cout << "Hello" << std::endl;
+  std::cout << "Hello" << std::endl;
+  auto text = std::format("{} is {}", 10, 10);
+  std::cout << text << "\n";
+  test_chrono();
+  std::print("The answer is {}\n", 42);
+  std::println("I am printing a line {}", 200);
+  std::println("==================");
+  std::FILE* F = std::fopen("cool.txt", "w");
+  if (F) {
+      std::println(F, "Writing to the file");
+      std::println(F, "Writing to the file");
+      std::println(F, "Writing to the file");
+      std::fclose(F);
+  }
+  std::fstream RF("cool.txt");
+  if (!RF.is_open()) {
+      std::cerr << "Error opening file\n";
+  }
+  std::string line;
+  while (std::getline(RF, line)) {
+      std::cout << std::format("Line: {}\n", line);
+  }
+  std::println("==================");
+  test_google_format();
+  return 0;
+}
+
+bool is_same_sum(const std::vector<i32>& x, const std::vector<i32>& y) {
     size_t leftArray = 0;
     size_t rightArray = 0;
 
@@ -141,8 +143,7 @@ bool isSameSum(const std::vector<i32>& x, const std::vector<i32>& y)
     return leftArraySum == rightArraySum;
 }
 
-std::vector<i32> combineTwoSorted(const std::vector<i32>& x, const std::vector<i32>& y)
-{
+std::vector<i32> combine_two_sorted(const std::vector<i32>& x, const std::vector<i32>& y) {
     size_t leftArrayPTR = 0;
     size_t rightArrayPTR = 0;
     std::vector<i32> result;
