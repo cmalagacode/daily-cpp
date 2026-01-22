@@ -8,6 +8,8 @@
 #include <chrono>
 #include <print>
 #include <fstream>
+#include <iterator>
+#include <array>
 
 
 using i32 = std::int32_t;
@@ -15,6 +17,39 @@ using u32 = std::uint32_t;
 
 void hello_world() {
     std::cout << "Hello World" << "\n";
+}
+
+void cpp_array() {
+  constexpr int kArraySize = 5;
+  float grades[kArraySize] = {50.23, 100.00, 92.33};
+  std::string names[] = {"Alice", "Bob", "Charlie"}; // lets the compiler determine the size
+  for (const auto& g : grades) {
+    std::cout << g << " ";
+  }
+  std::cout << "\n";
+  for (const auto& n : names) {
+    std::cout << n << " ";
+  }
+  std::cout << "\n";
+  std::cout << std::format("Array Size Bytes: {}, Array capacity {}", sizeof(grades), kArraySize);
+  std::cout << "\n";
+}
+
+bool dynamic_array() {
+  auto arr = std::vector<int> {};
+  arr.push_back(10);
+  arr.push_back(22);
+  arr.push_back(33);
+  arr.push_back(66);
+  for (const auto& x : arr) {
+    std::cout << x << " ";
+  }
+  std::cout << "\n";
+  {
+    std::vector<int> arr = {1, 2};
+    std::cout << "Hidden Size .." << arr.size() << "\n";
+  }
+  return arr.size() > 0;
 }
 
 bool is_pali(const std::string& x) {
@@ -55,68 +90,36 @@ void test_google_format() {
   std::cout << std::format("Number {}\n", i);
 }
 
+void test_iterator_stl() {
+  // fixed sized below
+  std::array<std::string, 10> name {"jam", "sally", "mally"};
+  for (auto it = name.begin(); it != name.end(); ++it) {
+    std::cout << std::format("{}\n", *it);
+  }
+  //
+  std::vector<int> v;
+}
+
+void test_chrono_again() {
+  auto datetime = std::chrono::system_clock::now();
+  datetime += std::chrono::hours(24);
+  std::cout << std::format("The date is {}\n", datetime);
+  std::cout << std::format("The month is {:%m}\n", datetime);
+  std::cout << std::format("The year is {:%Y}\n", datetime);
+  std::cout << std::format("The day is {:%d}\n", datetime);
+  std::cout << std::format("The Time is {:%T} UTC\n", datetime);
+
+  struct Company {
+    int id;
+    std::string name;
+    std::string address;
+  };
+  auto ex2 = Company{1, "EXAMPLE_CORP", "EXAMPLE_ADDRESS_LINE"};
+  std::cout << std::format("{}", ex2.id);
+}
 
 int main() {
-  hello_world();
-  // 3443
-  const std::string inputValue = "3443";
-  const bool result = is_pali(inputValue);
-  std::cout << std::boolalpha;
-  std::cout << result << "\n";
-  std::cout << "===================" << "\n";
-  const std::vector<i32> x = {20, 30, 40};
-  const std::vector<i32> y = {40, 30, 20};
-  std::cout << is_same_sum(x, y) << "\n";
-  std::cout << "===================" << "\n";
-  std::cout << "===================" << "\n";
-  const auto a1 = std::vector<i32> {10, 20, 30, 40};
-  const auto a2 = std::vector<i32> {5, 10, 15, 20, 50};
-  const auto foo = combine_two_sorted(a1, a2);
-  for (const auto& r : foo) {
-      std::cout << r << " ";
-  }
-  std::cout << "\n";
-  std::cout << "===================" << "\n";
-  std::cout << "===================" << "\n";
-
-  std::vector<i32> windowFindInput = {10, 5, 7, 10, 10};
-  constexpr i32 target = 20;
-  i32 windowResult = window::find(windowFindInput, target);
-  std::cout << "Window Result: " << windowResult << "\n";
-  std::cout << "================" << std::endl;
-  testConvertToNumber("22");
-  std::cout << "================" << std::endl;
-  auto r = testConvertToNumberBase2("10110");
-  std::cout << r << std::endl;
-  std::cout << "================" << std::endl;
-  testConvertDouble("23.23");
-  testConvertFloat("400.23");
-  // pracChar32();
-  std::cout << "Hello" << std::endl;
-  std::cout << "Hello" << std::endl;
-  auto text = std::format("{} is {}", 10, 10);
-  std::cout << text << "\n";
-  test_chrono();
-  std::print("The answer is {}\n", 42);
-  std::println("I am printing a line {}", 200);
-  std::println("==================");
-  std::FILE* F = std::fopen("cool.txt", "w");
-  if (F) {
-      std::println(F, "Writing to the file");
-      std::println(F, "Writing to the file");
-      std::println(F, "Writing to the file");
-      std::fclose(F);
-  }
-  std::fstream RF("cool.txt");
-  if (!RF.is_open()) {
-      std::cerr << "Error opening file\n";
-  }
-  std::string line;
-  while (std::getline(RF, line)) {
-      std::cout << std::format("Line: {}\n", line);
-  }
-  std::println("==================");
-  test_google_format();
+  test_iterator_stl();
   return 0;
 }
 
