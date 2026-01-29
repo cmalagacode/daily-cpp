@@ -10,6 +10,8 @@
 #include <fstream>
 #include <iterator>
 #include <array>
+#include <unordered_map>
+#include <set>
 
 
 using i32 = std::int32_t;
@@ -153,14 +155,64 @@ void testChronoAgain() {
   std::cout << std::format("{}", ex2.id);
 }
 
+void practiceSet()
+{
+    std::set<int> s;
+    int x = 10;
+    int y = 10;
+    while (x > 0)
+    {
+        s.insert(x);
+        x--;
+    }
+    while (y > 0)
+    {
+        s.insert(x);
+        y--;
+    }
+    for (auto it = s.begin(); it != s.end(); ++it)
+    {
+        std::cout << *it << " ";
+    }
+}
+
+void practiceHashMap()
+{
+    enum STATE
+    {
+        WIN = 1,
+        LOSE = 0,
+    };
+    std::unordered_map<float, STATE> teams;
+    teams[1.0f] = STATE::WIN;
+    teams[2.0f] = STATE::LOSE;
+    teams[3.0f] = STATE::WIN;
+    teams[4.0f] = STATE::LOSE;
+    teams[5.0f] = STATE::WIN;
+    for (const auto& [key, value] : teams)
+    {
+        std::string statement = std::format("{{ {}:{} }}\n", key, static_cast<int>(value));
+        std::cout << statement;
+    }
+    enum Teams
+    {
+       USF = 1,
+        FSU = 2,
+        UCF = 3,
+    };
+    std::unordered_map<Teams, int> teamScore;
+    teamScore[USF] = 100;
+    teamScore[FSU] = 100;
+    teamScore[UCF] = 100;
+    for (const std::pair<Teams, int> pair : teamScore)
+    {
+        std::cout << std::format("{{ {}:{} }}\n", static_cast<int>(pair.first), pair.second);
+    }
+}
+
 int main()
 {
-    std::cout << std::format("{}\n", isTodayBefore(2022));
-    std::cout << std::format("{}\n", isTodayBefore(2023));
-    std::cout << std::format("{}\n", isTodayBefore(2024));
-    std::cout << std::format("{}\n", isTodayBefore(2025));
-    std::cout << std::format("{}\n", isTodayBefore(2026));
-    std::cout << std::format("{}\n", isTodayBefore(2027));
+    practiceSet();
     return 0;
 }
 
