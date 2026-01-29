@@ -14,9 +14,46 @@
 
 using i32 = std::int32_t;
 using u32 = std::uint32_t;
+using i8 = std::int8_t;
+using u8 = std::uint8_t;
 
-void hello_world() {
+bool isTodayBefore(i32 yy)
+{
+    auto today = std::chrono::system_clock::now();
+    i32 year = std::stoi(std::format("{:%Y}", today));
+    return year > yy;
+}
+
+
+void helloWorld()
+{
     std::cout << "Hello World" << "\n";
+    std::int8_t x = 10;
+    if (x > 9)
+    {
+        std::cout << "Yes this is true";
+    }
+    for (size_t i = 0; i < 10; i++)
+    {
+        std::cout << i << " ";
+    }
+    std::cout << "\n";
+}
+
+void countDown(std::int32_t x)
+{
+    for (size_t i = x; i > 0; i--)
+    {
+        std::cout << std::format("Count Down: {}\n", i);
+    }
+}
+
+void countUp(std::int32_t x)
+{
+    for (size_t i = 0; i < x; i++)
+    {
+        std::cout << std::format("Count Up: {}\n", i);
+    }
 }
 
 void cpp_array() {
@@ -52,6 +89,12 @@ bool dynamic_array() {
   return arr.size() > 0;
 }
 
+bool isDynamicArray()
+{
+    std::array<int, 5> arr = {1, 2, 3, 4, 5};
+    return arr.size() == 5;
+}
+
 bool is_pali(const std::string& x) {
     size_t left = 0;
     size_t right = x.size() - 1;
@@ -83,15 +126,7 @@ void test_chrono() {
     std::cout << "The current time is: " << currTime << "\n";
 }
 
-void test_google_format() {
-  std::string name = "Google";
-  std::cout << std::format("Hello {} format\n", name);
-  std::int8_t i = 0;
-  std::cout << std::format("Number {}\n", i);
-}
-
 void test_iterator_stl() {
-  // fixed sized below
   std::array<std::string, 10> name {"jam", "sally", "mally"};
   for (auto it = name.begin(); it != name.end(); ++it) {
     std::cout << std::format("{}\n", *it);
@@ -100,7 +135,7 @@ void test_iterator_stl() {
   std::vector<int> v;
 }
 
-void test_chrono_again() {
+void testChronoAgain() {
   auto datetime = std::chrono::system_clock::now();
   datetime += std::chrono::hours(24);
   std::cout << std::format("The date is {}\n", datetime);
@@ -118,9 +153,15 @@ void test_chrono_again() {
   std::cout << std::format("{}", ex2.id);
 }
 
-int main() {
-  test_iterator_stl();
-  return 0;
+int main()
+{
+    std::cout << std::format("{}\n", isTodayBefore(2022));
+    std::cout << std::format("{}\n", isTodayBefore(2023));
+    std::cout << std::format("{}\n", isTodayBefore(2024));
+    std::cout << std::format("{}\n", isTodayBefore(2025));
+    std::cout << std::format("{}\n", isTodayBefore(2026));
+    std::cout << std::format("{}\n", isTodayBefore(2027));
+    return 0;
 }
 
 bool is_same_sum(const std::vector<i32>& x, const std::vector<i32>& y) {
