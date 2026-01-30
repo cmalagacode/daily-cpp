@@ -12,12 +12,45 @@
 #include <array>
 #include <unordered_map>
 #include <set>
+#include <memory>
+#include <algorithm>
+#include <memory>
 
 
 using i32 = std::int32_t;
 using u32 = std::uint32_t;
 using i8 = std::int8_t;
 using u8 = std::uint8_t;
+
+struct ListNode
+{
+    int val;
+    ListNode* next;
+    ListNode* prev;
+    ListNode(int v) : val {v}, next {nullptr}, prev {nullptr} {}
+};
+
+struct DoublyLinkedList
+{
+    ListNode* head;
+    ListNode* tail;
+    std::int32_t size;
+    DoublyLinkedList() : head {nullptr}, tail {nullptr}, size {0} {}
+    ~DoublyLinkedList()
+    {
+        auto currentNode = head;
+        while (currentNode != nullptr)
+        {
+            auto nextNode = currentNode->next;
+            delete currentNode;
+            currentNode = nextNode;
+        }
+        head = nullptr;
+        tail = nullptr;
+        size = 0;
+    }
+
+};
 
 bool isTodayBefore(i32 yy)
 {
@@ -176,6 +209,42 @@ void practiceSet()
     }
 }
 
+
+void helperFunctionAddToEnd(DoublyLinkedList* container, ListNode* node)
+{
+    if (container->size <= 0)
+    {
+        container->head = node;
+        container->tail = node;
+        container->size++;
+        return;
+    }
+    container->tail->next = node;
+    node->prev = container->tail;
+    container->tail = node;
+    container->size++;
+}
+
+void playPart2LinkedList()
+{
+    DoublyLinkedList* l1 = new DoublyLinkedList();
+    helperFunctionAddToEnd(l1, new ListNode(1));
+    helperFunctionAddToEnd(l1, new ListNode(2));
+    helperFunctionAddToEnd(l1, new ListNode(3));
+
+    auto currentNode = l1->head;
+    while (currentNode != nullptr)
+    {
+        std::println(
+            "Node Value: {} Prev Node Address {}",
+            currentNode->val,
+            static_cast<void*>(currentNode->prev)
+            );
+        currentNode = currentNode->next;
+    }
+    delete l1;
+}
+
 void practiceHashMap()
 {
     enum STATE
@@ -210,9 +279,74 @@ void practiceHashMap()
     }
 }
 
+void reverseString(std::string& s)
+{
+    size_t left = 0, right = s.size() - 1;
+
+    while (left < right)
+    {
+        char temp = s[left];
+        s[left] = s[right];
+        s[right] = temp;
+
+        left++;
+        right--;
+    }
+}
+
+void reverseStringSTL(std::string& s)
+{
+    std::reverse(s.begin(), s.end());
+}
+
+void binaryTreeDFS()
+{
+    class TreeNode
+    {
+    public:
+        int val;
+        std::unique_ptr<TreeNode> left;
+        std::unique_ptr<TreeNode> right;
+        TreeNode(const int x) : val(x), left(nullptr), right(nullptr) {}
+    };
+
+    class BinaryTree
+    {
+    public:
+        std::unique_ptr<TreeNode> root;
+        BinaryTree(std::unique_ptr<TreeNode> r) : root{std::move(r)} {}
+
+        void dfs()
+        {
+           dfsHelper(root.get());
+        }
+    private:
+        void dfsHelper(TreeNode* n)
+        {
+            if (n == nullptr)
+            {
+                return;
+            }
+            std::cout << n->val << " ";
+            dfsHelper(n->left.get());
+            dfsHelper(n->right.get());
+        }
+    };
+
+    auto root = std::make_unique<TreeNode>(1);
+    BinaryTree tree(std::move(root));
+    tree.root->left = std::make_unique<TreeNode>(2);
+    tree.root->right = std::make_unique<TreeNode>(3);
+    tree.dfs();
+    std::cout << "\n";
+    tree.dfs();
+}
+
+
+
 int main()
 {
-    practiceSet();
+    binaryTreeDFS();
     return 0;
 }
 
