@@ -6,7 +6,6 @@
 #include <bitset>
 #include <format>
 #include <chrono>
-#include <print>
 #include <fstream>
 #include <iterator>
 #include <array>
@@ -223,26 +222,6 @@ void helperFunctionAddToEnd(DoublyLinkedList* container, ListNode* node)
     node->prev = container->tail;
     container->tail = node;
     container->size++;
-}
-
-void playPart2LinkedList()
-{
-    DoublyLinkedList* l1 = new DoublyLinkedList();
-    helperFunctionAddToEnd(l1, new ListNode(1));
-    helperFunctionAddToEnd(l1, new ListNode(2));
-    helperFunctionAddToEnd(l1, new ListNode(3));
-
-    auto currentNode = l1->head;
-    while (currentNode != nullptr)
-    {
-        std::println(
-            "Node Value: {} Prev Node Address {}",
-            currentNode->val,
-            static_cast<void*>(currentNode->prev)
-            );
-        currentNode = currentNode->next;
-    }
-    delete l1;
 }
 
 void practiceHashMap()
